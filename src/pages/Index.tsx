@@ -83,13 +83,11 @@ const Index = () => {
         responseType: "blob",
       });
       const text = await response.data.text();
-      console.log({ text });
       const lines = text.split("\n").filter((line) => line.trim() !== "");
       if (lines.length === 0) {
         setError("The processed CSV file appears to be empty");
         return;
       }
-      console.log({ lines });
       const headers = lines[0]
         .split(",")
         .map((header) => header.trim().replace(/"/g, ""));
@@ -99,7 +97,6 @@ const Index = () => {
         setError("Required columns not found in the processed CSV");
         return;
       }
-      console.log({ headers, departmentIdx, salesIdx });
       const filteredHeaders = [headers[departmentIdx], headers[salesIdx]];
       const rows = lines.slice(1).map((line) => {
         const cells = line
@@ -140,7 +137,6 @@ const Index = () => {
               /\/$/,
               ""
             )}${downloadLink}`;
-            console.log({ csvUrl });
             fetchAndDisplayProcessedCSV(csvUrl);
           }
         }
@@ -181,7 +177,6 @@ const Index = () => {
   };
 
   const fileName = downloadLink ? downloadLink.split("/").pop() : "file.csv";
-  console.log({ isJobCompleted, jobId });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">

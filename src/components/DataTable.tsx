@@ -11,7 +11,6 @@ interface DataTableProps {
 }
 
 export const DataTable = ({ data }: DataTableProps) => {
-  console.log({ data });
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const rowsPerPage = 10;
